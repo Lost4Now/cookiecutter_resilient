@@ -33,7 +33,7 @@ class {{ cookiecutter.class_name }}(QueryRunner):
 
     def __init__(self, opts):
         query_options = opts.get(CONFIG_DATA_SECTION, {})
-        super("{{ cookiecutter.class_name }}", self).__init__(opts, query_options, run_search,
+        super({{ cookiecutter.class_name }}, self).__init__(opts, query_options, run_search,
                                                  wait_for_complete=True)
 
 

@@ -1,15 +1,13 @@
 {
-    "author_name": "Lost4Now",
-    "author_email": "Lost4Now@protonmail.com",
+    "author_name": "",
+    "author_email": "",
 
-    "package_name": "rc-lookup-service",
+    "package_name": "rc-tool-lookup",
     "package_version": "0.1.0",
-    "package_description": "Minimal cookie cutter from creating resilient packages",
-    "package_url": "https://github.com/Lost4Now/cookiecutter_resilient",
+    "package_description": "",
+    "package_url": "",
     
-    "class_name": "MyClass"
+    "class_name": "ToolLookup",
     "config_section": "General"
-    "readme_pypi_badge": true,
-    "readme_travis_badge": false,
-    "readme_travis_url": ""
+
 }
