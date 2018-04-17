@@ -1,5 +1,8 @@
 import setuptools
-
+import os.path
+import sys
+from setuptools import setup, find_packages
+from setuptools.command.test import test as TestCommand
 
 class PyTest(TestCommand):
     user_options = [('pytestargs=', 'a', "Resilient Environment Arguments")]
@@ -25,6 +28,10 @@ queries = [u"query_runner/data/queries/" + filename for filename in os.listdir("
 
 setuptools.setup(
     name="{{ cookiecutter.package_name }}",
+    namespace_packages=['query_runner', 'query_runner.components','query_runner.lib'],
+
+    setup_requires=[''],
+
     version="{{ cookiecutter.package_version }}",
     url="{{ cookiecutter.package_url }}",
 
@@ -34,10 +41,10 @@ setuptools.setup(
     description="{{ cookiecutter.package_description }}",
     long_description=open('README.rst').read(),
 
-    packages=setuptools.find_packages(),
+    packages=find_packages(),
 
     install_requires=[
-        'resilient_circuits>=28.0.0',
+        'resilient_circuits>=29.0.0',
         'rc-query-runner',
     ],
     tests_require=["pytest",
@@ -52,8 +59,8 @@ setuptools.setup(
                   ("query_runner/data/queries", queries)],
     entry_points={
         # Register the components with resilient_circuits
-        "resilient.circuits.components": ["{{ cookiecutter.class_name }} = query_runner.components.{{ cookiecutter.package_name }}:{{ cookiecutter.class_name }}"],
-        "resilient.circuits.configsection": ["mcafee_gen_config = query_runner.components.{{ cookiecutter.package_name }}:config_section_data"]
+        "resilient.circuits.components": ["{{ cookiecutter.class_name }}=query_runner.components.{{ cookiecutter.package_name }}:{{ cookiecutter.class_name }}"],
+        "resilient.circuits.configsection": ["{{ cookiecutter.class_name }}_config = query_runner.components.{{ cookiecutter.package_name }}:config_section_data"]
     }
 
 )
