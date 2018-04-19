@@ -1,3 +1,4 @@
-include README.rst
-include query_runner/data/*
-include query_runner/LICENSE
+include README.md
+include {{cookiecutter.package_name}}/data/*
+include {{cookiecutter.package_name}}/LICENSE
+include {{cookiecutter.package_name}}/version.txt

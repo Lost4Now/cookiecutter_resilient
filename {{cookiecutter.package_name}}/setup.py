@@ -4,6 +4,15 @@ import sys
 from setuptools import setup, find_packages
 from setuptools.command.test import test as TestCommand
 
+def read_version_number():
+    path = os.path.join(os.path.dirname(__file__), "{{ cookiecutter.package_name }}", "version.txt")
+    with open(path) as f:
+        ver = f.read()
+    return ver.strip()
+
+version = read_version_number()
+
+
 class PyTest(TestCommand):
     user_options = [('pytestargs=', 'a', "Resilient Environment Arguments")]
 
@@ -23,44 +32,33 @@ class PyTest(TestCommand):
         errno = pytest.main(self.test_args)
         sys.exit(errno)
 
-
-queries = [u"query_runner/data/queries/" + filename for filename in os.listdir("query_runner/data/queries")]
-
-setuptools.setup(
+setup(
     name="{{ cookiecutter.package_name }}",
-    namespace_packages=['query_runner', 'query_runner.components','query_runner.lib'],
-
-    setup_requires=[''],
-
-    version="{{ cookiecutter.package_version }}",
+    version=version,
     url="{{ cookiecutter.package_url }}",
-
+    license='MIT',
     author="{{ cookiecutter.author_name }}",
     author_email="{{ cookiecutter.author_email }}",
-
-    description="{{ cookiecutter.package_description }}",
-    long_description=open('README.rst').read(),
-
-    packages=find_packages(),
-
     install_requires=[
-        'resilient_circuits>=29.0.0',
-        'rc-query-runner',
+        'resilient_circuits>={}.{}'.format(major, minor)
     ],
     tests_require=["pytest",
                    "pytest_resilient_circuits"],
-    cmdclass={"test": PyTest},
+    cmdclass = {"test" : PyTest},
+    author_email='support@resilientsystems.com',
+
+    description="{{ cookiecutter.package_description }}",
+    long_description=open('README.rst').read(),
+    packages=find_packages(),
+    include_package_data=True,
+    platforms='any',
     classifiers=[
-        'Development Status :: 2 - Pre-Alpha',
         'Programming Language :: Python',
     ],
-    data_files = [("query_runner", ["query_runner/LICENSE"]),
-                  ("query_runner/data", ["query_runner/data/app.config.{{ cookiecutter.package_name }}",]),
-                  ("query_runner/data/queries", queries)],
-    entry_points={
-        # Register the components with resilient_circuits
-        "resilient.circuits.components": ["{{ cookiecutter.class_name }}=query_runner.components.{{ cookiecutter.package_name }}:{{ cookiecutter.class_name }}"],
-        "resilient.circuits.configsection": ["{{ cookiecutter.class_name }}_config = query_runner.components.{{ cookiecutter.package_name }}:config_section_data"]
-    }
 
+    entry_points={
+        # Register the component with resilient_circuits
+        "resilient.circuits.components": ["{{ cookiecutter.class_name }}={{ cookiecutter.package_name }}.components.{{ cookiecutter.package_name }}:{{ cookiecutter.class_name }}"],
+        "resilient.circuits.configsection": ["{{ cookiecutter.class_name }}_config={{ cookiecutter.package_name }}.components.{{ cookiecutter.package_name }}:config_section_data"]
+    }
 )

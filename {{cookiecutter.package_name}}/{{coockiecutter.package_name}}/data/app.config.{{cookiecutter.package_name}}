@@ -2,4 +2,4 @@
 # The '{{ cookiecutter.class_name }}' from '{{ cookiecutter.package_name }}' action component
 # -----------------------------------------------------------------------------------------
 [{{ cookiecutter.config_section }}]
-var1=
+queue={{cookiecutter.queue}}
