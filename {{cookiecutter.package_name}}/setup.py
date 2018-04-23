@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 from setuptools.command.test import test as TestCommand
 
 def read_version_number():
-    path = os.path.join(os.path.dirname(__file__), "{{ cookiecutter.package_name }}", "version.txt")
+    path = os.path.join(os.path.dirname(__file__), "{{ cookiecutter.module_name }}", "version.txt")
     with open(path) as f:
         ver = f.read()
     return ver.strip()
@@ -58,7 +58,7 @@ setup(
 
     entry_points={
         # Register the component with resilient_circuits
-        "resilient.circuits.components": ["{{ cookiecutter.class_name }}={{ cookiecutter.package_name }}.components.{{ cookiecutter.package_name }}:{{ cookiecutter.class_name }}"],
-        "resilient.circuits.configsection": ["{{ cookiecutter.class_name }}_config={{ cookiecutter.package_name }}.components.{{ cookiecutter.package_name }}:config_section_data"]
+        "resilient.circuits.components": ["{{ cookiecutter.class_name }}={{ cookiecutter.module_name }}.components.{{ cookiecutter.module_name }}:{{ cookiecutter.class_name }}"],
+        "resilient.circuits.configsection": ["{{ cookiecutter.class_name }}_config={{ cookiecutter.module_name }}.components.{{ cookiecutter.module_name }}:config_section_data"]
     }
 )
