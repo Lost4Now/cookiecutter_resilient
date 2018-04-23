@@ -21,8 +21,8 @@ CONFIG_DATA_SECTION = "{{ cookiecutter.config_section }}"
 
 def config_section_data():
     """sample config data for use in app.config"""
-    section_config_fn = resource_filename(Requirement("{{ cookiecutter.package_name }}"), "query_runner/data/app.config.{{ cookiecutter.package_name }}")
-    query_dir = resource_filename(Requirement("{{ cookiecutter.package_name }}"), "query_runner/data/queries_data.json")
+    section_config_fn = resource_filename(Requirement("{{ cookiecutter.package_name }}"), "{{ cookiecutter.module_name }}/data/app.config.{{ cookiecutter.package_name }}")
+    query_dir = resource_filename(Requirement("{{ cookiecutter.package_name }}"), "{{ cookiecutter.module_name }}/data/queries_data.json")
 
     with open(section_config_fn, 'r') as section_config_file:
         section_config = Template(section_config_file.read())
