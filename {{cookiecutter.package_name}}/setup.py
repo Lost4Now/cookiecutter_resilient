@@ -11,7 +11,7 @@ def read_version_number():
     return ver.strip()
 
 version = read_version_number()
-
+major, minor, _ = version.split('.', 2)
 
 class PyTest(TestCommand):
     user_options = [('pytestargs=', 'a', "Resilient Environment Arguments")]
@@ -45,7 +45,6 @@ setup(
     tests_require=["pytest",
                    "pytest_resilient_circuits"],
     cmdclass = {"test" : PyTest},
-    author_email='support@resilientsystems.com',
 
     description="{{ cookiecutter.package_description }}",
     long_description=open('README.rst').read(),
